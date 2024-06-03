@@ -4,7 +4,8 @@ import { useContext } from "react";
 import { UserContext } from "../../../context/UserProvider";
 
 const Navbar = () => {
-    const user = useContext(UserContext)
+    const authData = useContext(UserContext)
+    console.log(authData)
     return (
         <div className="navbar bg-base-100 sticky z-40 top-0">
             <div className="navbar-start">
@@ -31,7 +32,7 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-end">
-                {user ? <UserDropdown user={user}></UserDropdown> :
+                {authData?.user ? <UserDropdown user={authData.user}></UserDropdown> :
                     <ul className="menu menu-horizontal px-1">
                         <li><Link to={"/login"}>Login</Link></li>
                     </ul>}

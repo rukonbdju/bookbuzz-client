@@ -1,0 +1,15 @@
+[
+    {
+        "name":"",
+        "email":"",
+        "password":"",
+        "uid":"",
+        "photo_URL":"",
+        "occupation":"",
+        "phone":"",
+        "country":"",
+        "state":"",
+        "created_At":"",
+        "updated_At":""
+    }
+]

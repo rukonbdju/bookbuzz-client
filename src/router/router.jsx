@@ -9,6 +9,7 @@ import BlogPage from "../pages/BlogPage/BlogPage";
 import BookPage from "../pages/BookPage/BookPage";
 import HomePage from "../pages/HomePage/HomePage";
 import PrivateRoute from "./PrivateRoute";
+import SingleBookPage from "../pages/SingleBookPage/SingleBookPage";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
                 element: <BookPage></BookPage>
             },
             {
+                path:"/books/:id",
+                element:<SingleBookPage></SingleBookPage>
+            },
+            {
                 path: "blogs",
                 element: <PrivateRoute><BlogPage></BlogPage></PrivateRoute>
             },
@@ -45,6 +50,7 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register></Register>
-    }
+    },
+    
 ])
 export default router;
