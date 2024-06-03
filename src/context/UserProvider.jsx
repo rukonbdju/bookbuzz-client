@@ -2,12 +2,12 @@ import { Children, createContext } from "react"
 import useFirebase from "../hooks/useFirebase"
 export const UserContext = createContext(null)
 
-const UserProvider = ({children}) => {
-    const { user } = useFirebase()
+const UserProvider = ({ children }) => {
+    const value = useFirebase()
     return (
-    <UserContext.Provider value={user}>
-        {children}
-    </UserContext.Provider>
+        <UserContext.Provider value={value}>
+            {children}
+        </UserContext.Provider>
     )
 }
 
