@@ -8,41 +8,41 @@ import About from "../pages/About/About";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 
-const router=createBrowserRouter([
+const router = createBrowserRouter([
     {
-        path:"/",
-        element:<RootLayout></RootLayout>,
-        errorElement:<ErrorPage></ErrorPage>,
-        children:[
+        path: "/",
+        element: <RootLayout></RootLayout>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
             {
-                path:"",
-                element:<Home></Home>
+                path: "",
+                element: <Home></Home>
             },
             {
-                path:"home",
-                element:<Home></Home>
+                path: "home",
+                element: <Home></Home>
             },
             {
-                path:"books",
-                element:<Books></Books>
+                path: "books",
+                element: <Books></Books>
             },
             {
-                path:"blogs",
-                element:<Blogs></Blogs>
+                path: "blogs",
+                element: <Blogs></Blogs>
             },
             {
-                path:"about",
-                element:<About></About>
+                path: "about",
+                element: <About></About>
             },
-            {
-                path:"login",
-                element:<Login></Login>
-            },
-            {
-                path:"register",
-                element:<Register></Register>
-            }
         ]
+    },
+    {
+        path: "/login",
+        element: <Login></Login>
+    },
+    {
+        path: "/register",
+        element: <Register></Register>
     }
 ])
 export default router;
