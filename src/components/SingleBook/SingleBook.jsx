@@ -7,7 +7,7 @@ const SingleBook = () => {
     const [book, setBook] = useState({})
     console.log(params)
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/books/${params.id}`).then(res => setBook(res.data))
+        axios.get(`https://bookbuzz-server.vercel.app/api/books/${params.id}`).then(res => setBook(res.data))
     }, [params.id])
     return (
         <div className=" w-4/5 mx-auto">

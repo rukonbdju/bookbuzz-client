@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 const useBooks = () => {
     const [books, setBooks] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:3000/api/books')
+        axios.get('https://bookbuzz-server.vercel.app/api/books')
             .then(res => setBooks(res.data))
     }, [])
     return books;

@@ -27,7 +27,7 @@ const useFirebase = (previousLocation, navigate) => {
                 created_At: result.user.metadata.creationTime,
                 updated_At: ""
             }
-            const response = await axios.post("http://localhost:3000/api/users", userData)
+            const response = await axios.post("https://bookbuzz-server.vercel.app/api/users", userData)
             navigate(previousLocation, { replace: true })
         } catch (error) {
             setErrorMessage(error.message)
@@ -70,7 +70,7 @@ const useFirebase = (previousLocation, navigate) => {
                 created_At: result?.user?.metadata.creationTime,
                 updated_At: ""
             }
-            const response = await axios.post("http://localhost:3000/api/users", userInfo)
+            const response = await axios.post("https://bookbuzz-server.vercel.app/api/users", userInfo)
             navigate(previousLocation, { replace: true })
 
         } catch (error) {
