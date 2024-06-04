@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase/auth";
+import axios from "axios";
 
 const useFirebase = (previousLocation, navigate) => {
     const [user, setUser] = useState(null)
@@ -12,7 +13,21 @@ const useFirebase = (previousLocation, navigate) => {
     const googleLogin = async () => {
         try {
             setIsLoading(true)
-            await signInWithPopup(auth, googleProvider)
+            const result = await signInWithPopup(auth, googleProvider)
+            const userData = {
+                name: result.user.displayName,
+                email: result.user.email,
+                password: "",
+                uid: result.user.uid,
+                photo_URL: result.user.photoURL,
+                occupation: "",
+                phone: result.user.phoneNumber,
+                country: "",
+                state: "",
+                created_At: result.user.metadata.creationTime,
+                updated_At: ""
+            }
+            const response = await axios.post("http://localhost:3000/api/users", userData)
             navigate(previousLocation, { replace: true })
         } catch (error) {
             setErrorMessage(error.message)
@@ -38,15 +53,30 @@ const useFirebase = (previousLocation, navigate) => {
     const register = async (userData) => {
         try {
             setIsLoading(true)
-            await createUserWithEmailAndPassword(auth, userData.email, userData.password)
+            const result = await createUserWithEmailAndPassword(auth, userData.email, userData.password)
             await updateProfile(auth.currentUser, {
                 displayName: userData.name
             })
+            const userInfo = {
+                name: userData.name,
+                email: userData.email,
+                password: userData.password,
+                uid: result?.user?.uid,
+                photo_URL: "",
+                occupation: "",
+                phone: "",
+                country: "",
+                state: "",
+                created_At: result?.user?.metadata.creationTime,
+                updated_At: ""
+            }
+            const response = await axios.post("http://localhost:3000/api/users", userInfo)
             navigate(previousLocation, { replace: true })
 
         } catch (error) {
             setErrorMessage(error.message)
         } finally {
+
             setIsLoading(false)
         }
     }

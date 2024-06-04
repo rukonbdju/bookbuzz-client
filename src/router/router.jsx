@@ -10,6 +10,9 @@ import BookPage from "../pages/BookPage/BookPage";
 import HomePage from "../pages/HomePage/HomePage";
 import PrivateRoute from "./PrivateRoute";
 import SingleBookPage from "../pages/SingleBookPage/SingleBookPage";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import Profile from "../components/Dashboard/Profile/Profile";
+import Books from "../components/Dashboard/Books/Books";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +33,7 @@ const router = createBrowserRouter([
                 element: <BookPage></BookPage>
             },
             {
-                path:"/books/:id",
+                path:"books/:id",
                 element:<SingleBookPage></SingleBookPage>
             },
             {
@@ -50,6 +53,26 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register></Register>
+    },
+    {
+        path: "/dashboard",
+        element: <PrivateRoute>
+            <Dashboard></Dashboard>
+        </PrivateRoute>,
+        children:[
+            {
+                path:'',
+                element: <div>This dashboard</div>
+            },
+            {
+                path:'profile',
+                element: <Profile></Profile>
+            },
+            {
+                path:'books',
+                element: <Books></Books>
+            },
+        ]
     },
     
 ])

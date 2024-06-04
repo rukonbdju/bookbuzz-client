@@ -5,7 +5,7 @@ import Book from "../Books/Book";
 const RecentlyAddedBooks=()=>{
     const books=useBooks()
     return(
-        <div className="w-4/5 mx-auto">
+        <div className="">
             <h1 className="text-3xl">Recently added books</h1>
             <div className="divider"></div>
             <div className="grid grid-cols-3 gap-4">
