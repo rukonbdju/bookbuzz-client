@@ -2,21 +2,29 @@ import { Button, Field, Input, Label } from '@headlessui/react'
 import loginPhoto from "../../assets/login.svg"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useFirebase from '../../hooks/useFirebase';
+import { useState } from 'react';
 
 const Login = () => {
+    const [loading,setLoading]=useState(false)
     const navigate = useNavigate();
     const {state} = useLocation();
 
-    const { googleLogin,login,isLoading,errorMessage } = useFirebase(state?.from?.pathname || "/",navigate)
-    console.log(isLoading)
+    const { googleLogin,login,errorMessage } = useFirebase(state?.from?.pathname || "/",navigate)
 
-    const handleLogin = (e) => {
+    const handleLogin = async(e) => {
+        setLoading(true)
         e.preventDefault()
         const userData={
             email:e.target.email.value,
             password:e.target.password.value,
         }
-        login(userData)
+        await login(userData)
+        setLoading(false)
+    }
+    const handleGoogleLogin= async()=>{
+        setLoading(true)
+        await googleLogin()
+        setLoading(false)
     }
 
     return (
@@ -42,13 +50,13 @@ const Login = () => {
                             </Field>
                         </div>
                         <div className="w-full max-w-md">
-                            <Button type='submit' className="btn bg-blue-300 hover:bg-blue-400 w-full">Login{isLoading && <span className="loading loading-spinner loading-md"></span>}</Button>
+                            <Button type='submit' className="btn bg-blue-300 hover:bg-blue-400 w-full">Login{loading && <span className="loading loading-spinner loading-md"></span>}</Button>
                             <span className="text-sm/6 font-medium ">New user? <Link to={"/register"} className='hover:text-blue-600'>Register now.</Link></span>
                         </div>
                     </form>
                     <div className="divider my-0">OR</div>
                     <div className="w-full max-w-md p-8">
-                        <Button onClick={() => googleLogin()} className="btn bg-blue-300 hover:bg-blue-400 w-full">CONTINUE WITH GOOGLE {isLoading && <span className="loading loading-spinner loading-md"></span>}</Button>
+                        <Button onClick={() => handleGoogleLogin()} className="btn bg-blue-300 hover:bg-blue-400 w-full">CONTINUE WITH GOOGLE {loading && <span className="loading loading-spinner loading-md"></span>}</Button>
                         <Button className="btn bg-blue-300 hover:bg-blue-400 w-full">CONTINUE WITH FACEBOOK</Button>
                     </div>
                 </div>

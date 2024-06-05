@@ -5,7 +5,7 @@ import axios from "axios";
 
 const useFirebase = (previousLocation, navigate) => {
     const [user, setUser] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState('true')
     const [errorMessage, setErrorMessage] = useState({})
     const [message,setMessage]=useState(null)
     const googleProvider = new GoogleAuthProvider();
@@ -130,8 +130,8 @@ const useFirebase = (previousLocation, navigate) => {
             }
 
         })
-
-    }, [auth])
+        
+    }, [auth,user])
 
     return { user, isLoading, errorMessage,message, login, register, googleLogin, logout, updateUser, navigator }
 
