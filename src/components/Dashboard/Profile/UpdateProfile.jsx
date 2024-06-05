@@ -11,7 +11,7 @@ const UpdateProfile = () => {
     const { updateUser, isLoading, message, errorMessage } = useFirebase()
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/users/${uid}`)
+        axios.get(`https://bookbuzz-server.vercel.app/api/users/${uid}`)
             .then(res => setUserInfo(res.data))
             .catch(err => console.log(err))
     }, [uid])

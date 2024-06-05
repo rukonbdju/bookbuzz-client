@@ -9,7 +9,7 @@ const Book = ({ book, setBooks }) => {
     //delete book
     const handleDeleteBook = async (id) => {
         setLoading(true)
-        const response = await axios.post(`http://localhost:3000/api/books/delete/${id}`)
+        const response = await axios.post(`https://bookbuzz-server.vercel.app/api/books/delete/${id}`)
         const { acknowledged } = response
         if(acknowledged){
             setBooks((prev => prev.filter(item => item._id !== id)))

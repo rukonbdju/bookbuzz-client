@@ -20,7 +20,7 @@ const AddBook = () => {
             language: e.target.language.value,
             rating: e.target.rating.value
         };
-        const response = await axios.post("http://localhost:3000/api/books",bookInfo)
+        const response = await axios.post("https://bookbuzz-server.vercel.app/api/books",bookInfo)
         if(response.data.acknowledgement){
             setIsAddBook(true)
             toast("book added Successfully !")

@@ -11,7 +11,7 @@ const EditBook = () => {
 
     //get book by _id
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/books/${id}`)
+        axios.get(`https://bookbuzz-server.vercel.app/api/books/${id}`)
             .then(res => setBook(res.data))
             .catch(err => console.log(err))
     }, [id])
@@ -20,7 +20,7 @@ const EditBook = () => {
     const handleEditBook = async () => {
         setLoading(true)
         const { _id, ...bookInfo } = book
-        const response = await axios.post(`http://localhost:3000/api/books/${id}`, bookInfo)
+        const response = await axios.post(`https://bookbuzz-server.vercel.app/api/books/${id}`, bookInfo)
         setLoading(false)
         const { acknowledged, matchedCount, modifiedCount, upsertedCount, upsertedId } = response
 
