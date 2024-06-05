@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useFirebase from '../../hooks/useFirebase';
 
 const Login = () => {
-
     const navigate = useNavigate();
     const {state} = useLocation();
 
@@ -43,13 +42,13 @@ const Login = () => {
                             </Field>
                         </div>
                         <div className="w-full max-w-md">
-                            <Button type='submit' className="btn bg-blue-300 hover:bg-blue-400 w-full">Login</Button>
+                            <Button type='submit' className="btn bg-blue-300 hover:bg-blue-400 w-full">Login{isLoading && <span className="loading loading-spinner loading-md"></span>}</Button>
                             <span className="text-sm/6 font-medium ">New user? <Link to={"/register"} className='hover:text-blue-600'>Register now.</Link></span>
                         </div>
                     </form>
                     <div className="divider my-0">OR</div>
                     <div className="w-full max-w-md p-8">
-                        <Button onClick={() => googleLogin()} className="btn bg-blue-300 hover:bg-blue-400 w-full">CONTINUE WITH GOOGLE</Button>
+                        <Button onClick={() => googleLogin()} className="btn bg-blue-300 hover:bg-blue-400 w-full">CONTINUE WITH GOOGLE {isLoading && <span className="loading loading-spinner loading-md"></span>}</Button>
                         <Button className="btn bg-blue-300 hover:bg-blue-400 w-full">CONTINUE WITH FACEBOOK</Button>
                     </div>
                 </div>

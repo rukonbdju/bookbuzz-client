@@ -68,7 +68,7 @@ const Register = () => {
                             </Field>
                         </div>
                         <div className="w-full max-w-md">
-                            <Button type="submit" className="btn bg-blue-300 hover:bg-blue-400 w-full">Register</Button>
+                            <Button type="submit" className="btn bg-blue-300 hover:bg-blue-400 w-full">Register {isLoading && <span className="loading loading-spinner loading-md"></span>}</Button>
                             <span className="text-sm/6 font-medium ">Have an account? <Link to={"/login"} className='hover:text-blue-600'>Login now.</Link></span>
                         </div>
                     </form>

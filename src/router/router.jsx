@@ -13,6 +13,9 @@ import SingleBookPage from "../pages/SingleBookPage/SingleBookPage";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Profile from "../components/Dashboard/Profile/Profile";
 import Books from "../components/Dashboard/Books/Books";
+import AddBook from "../components/Dashboard/AddBook/AddBook";
+import EditBook from "../components/Dashboard/EditBook/EditBook";
+import UpdateProfile from "../components/Dashboard/Profile/UpdateProfile";
 
 const router = createBrowserRouter([
     {
@@ -62,15 +65,27 @@ const router = createBrowserRouter([
         children:[
             {
                 path:'',
-                element: <div>This dashboard</div>
+                element: <Profile></Profile>
             },
             {
                 path:'profile',
                 element: <Profile></Profile>
             },
             {
+                path:'editProfile',
+                element: <UpdateProfile></UpdateProfile>
+            },
+            {
                 path:'books',
                 element: <Books></Books>
+            },
+            {
+                path:'books/add',
+                element: <AddBook></AddBook>
+            },
+            {
+                path:'books/:id',
+                element: <EditBook></EditBook>
             },
         ]
     },

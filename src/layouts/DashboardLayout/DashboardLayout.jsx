@@ -20,7 +20,9 @@ const DashboardLayout = () => {
                             {/* Navbar menu content here */}
                             <li><Link to={"/home"}>Home</Link></li>
                             <li><Link to={"profile"}>Profile</Link></li>
+                            <li><Link to={"editProfile"}>Edit Profile</Link></li>
                             <li><Link to={"books"}>Books</Link></li>
+                            <li><Link to={"books/add"}>Add Book</Link></li>
                             <li>
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
@@ -38,8 +40,10 @@ const DashboardLayout = () => {
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 min-h-full bg-base-200">
                     {/* Sidebar content here */}
+                    <li><Link to={"/home"}>Home</Link></li>
                     <li><Link to={"profile"}>Profile</Link></li>
                     <li><Link to={"books"}>Books</Link></li>
+                    <li><Link to={"books/add"}>Add Book</Link></li>
                 </ul>
             </div>
         </div>

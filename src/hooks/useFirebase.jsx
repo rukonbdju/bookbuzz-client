@@ -7,27 +7,31 @@ const useFirebase = (previousLocation, navigate) => {
     const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [errorMessage, setErrorMessage] = useState({})
+    const [message,setMessage]=useState(null)
     const googleProvider = new GoogleAuthProvider();
 
     //google sign in
     const googleLogin = async () => {
         try {
             setIsLoading(true)
-            const result = await signInWithPopup(auth, googleProvider)
-            const userData = {
-                name: result.user.displayName,
-                email: result.user.email,
-                password: "",
-                uid: result.user.uid,
-                photo_URL: result.user.photoURL,
+            const {user} = await signInWithPopup(auth, googleProvider)
+            const userInfo = {
+                name: user.displayName,
+                email: user.email,
+                password: user.password,
+                uid: user?.uid,
+                photo_URL: user?.photoURL,
                 occupation: "",
-                phone: result.user.phoneNumber,
-                country: "",
-                state: "",
-                created_At: result.user.metadata.creationTime,
+                phone: "",
+                homeAddress: "",
+                workAddress: "",
+                dob: "",
+                gender: "",
+                created_At: user?.metadata.creationTime,
                 updated_At: ""
             }
-            const response = await axios.post("https://bookbuzz-server.vercel.app/api/users", userData)
+            const response = await axios.post("http://localhost:3000/api/users", userInfo)
+            setMessage(response.data)
             navigate(previousLocation, { replace: true })
         } catch (error) {
             setErrorMessage(error.message)
@@ -62,15 +66,18 @@ const useFirebase = (previousLocation, navigate) => {
                 email: userData.email,
                 password: userData.password,
                 uid: result?.user?.uid,
-                photo_URL: "",
+                photo_URL: result?.user?.photoURL,
                 occupation: "",
                 phone: "",
-                country: "",
-                state: "",
+                homeAddress: "",
+                workAddress: "",
+                dob: "",
+                gender: "",
                 created_At: result?.user?.metadata.creationTime,
                 updated_At: ""
             }
-            const response = await axios.post("https://bookbuzz-server.vercel.app/api/users", userInfo)
+            const response = await axios.post("http://localhost:3000/api/users", userInfo)
+            setMessage(response.data)
             navigate(previousLocation, { replace: true })
 
         } catch (error) {
@@ -79,6 +86,25 @@ const useFirebase = (previousLocation, navigate) => {
 
             setIsLoading(false)
         }
+    }
+
+    //update user
+    const updateUser = async (userInfo) => {
+        try {
+            setIsLoading(true)
+            const { _id, ...userData } = userInfo
+            await updateProfile(auth.currentUser, {
+                displayName: userInfo.name,
+            })
+            const response = await axios.post(`http://localhost:3000/api/users/${userInfo.uid}`, userData)
+            setMessage(response.data)
+
+        } catch (err) {
+            setErrorMessage(err.message)
+        } finally {
+            setIsLoading(false)
+        }
+
     }
 
     //logout
@@ -96,7 +122,6 @@ const useFirebase = (previousLocation, navigate) => {
 
     //get logged in user
     useEffect(() => {
-        setIsLoading(true)
         onAuthStateChanged(auth, (user) => {
 
             if (user) {
@@ -108,7 +133,7 @@ const useFirebase = (previousLocation, navigate) => {
 
     }, [auth])
 
-    return { user, isLoading, errorMessage, login, register, googleLogin, logout, navigator }
+    return { user, isLoading, errorMessage,message, login, register, googleLogin, logout, updateUser, navigator }
 
 }
 

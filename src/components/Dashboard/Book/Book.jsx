@@ -1,24 +1,20 @@
-import { Button } from "@headlessui/react"
+
 import axios from "axios"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import Modal from "../EditBook/Modal"
 
 const Book = ({ book, setBooks }) => {
-    let [isOpen, setIsOpen] = useState(false)
+    const [loading,setLoading]=useState(false)
 
-    function open() {
-        setIsOpen(true)
-    }
-
-    function close() {
-        setIsOpen(false)
-    }
     //delete book
     const handleDeleteBook = async (id) => {
-        const response = await axios.post(`https://bookbuzz-server.vercel.app/api/books/delete/${id}`)
-        setBooks((prev => prev.filter(item => item._id !== id)))
-        console.log(response)
+        setLoading(true)
+        const response = await axios.post(`http://localhost:3000/api/books/delete/${id}`)
+        const { acknowledged } = response
+        if(acknowledged){
+            setBooks((prev => prev.filter(item => item._id !== id)))
+        }
+        setLoading(true)
     }
 
     return (
@@ -52,9 +48,10 @@ const Book = ({ book, setBooks }) => {
             </td>
             <th>
                 <Link to={`/books/${book?._id}`} className="btn btn-ghost btn-xs">Details</Link>
-                <Button onClick={open} className="rounded-md btn btn-xs">Edit</Button>
-                <Modal close={close} isOpen={isOpen} ></Modal>
-                <button onClick={() => handleDeleteBook(book._id)} className="btn btn-ghost btn-xs">Delete</button>
+
+                <Link to={`${book?._id}`} className="rounded-md btn btn-xs">Edit</Link>
+
+                <button onClick={() => handleDeleteBook(book._id)} className="btn btn-ghost btn-xs">Delete {loading&&<span className="loading loading-spinner loading-md"></span>}</button>
             </th>
         </tr>
     )
