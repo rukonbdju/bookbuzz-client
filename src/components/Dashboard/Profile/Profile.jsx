@@ -19,7 +19,7 @@ const Profile = () => {
                     <div className="divider"></div>
                     <div>
                         <p>Name: {userInfo?.name}</p>
-                        <p>Birth: {userInfo?.birth ||"Not set"}</p>
+                        <p>Birth: {userInfo?.dob ||"Not set"}</p>
                         <p>Occupation: {userInfo?.occupation ||"Not set"}</p>
                         <p>Gender: {userInfo?.gender ||"Not set"}</p>
                     </div>
@@ -36,8 +36,8 @@ const Profile = () => {
                         <h1 className="text-2xl">Address</h1>
                     <div className="divider"></div>
                     <div>
-                        <p>Home: {userInfo?.address?.home ||"Not set"}</p>
-                        <p>Work: {userInfo?.address?.work ||"Not set"}</p>
+                        <p>Home: {userInfo?.homeAddress ||"Not set"}</p>
+                        <p>Work: {userInfo?.workAddress ||"Not set"}</p>
                     </div>
                 </section>
                 <section className="border-2 bg-blue-200 p-5 rounded-md">

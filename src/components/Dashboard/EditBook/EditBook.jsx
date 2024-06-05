@@ -3,8 +3,10 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Toaster } from "react-hot-toast"
 import { useParams } from "react-router-dom"
+import Toast from "../../Common/Toast"
 
 const EditBook = () => {
+    const [edited,setEdited]=useState(false)
     const [loading,setLoading]=useState(false)
     const [book, setBook] = useState({})
     const { id } = useParams()
@@ -22,7 +24,10 @@ const EditBook = () => {
         const { _id, ...bookInfo } = book
         const response = await axios.post(`https://bookbuzz-server.vercel.app/api/books/${id}`, bookInfo)
         setLoading(false)
-        const { acknowledged, matchedCount, modifiedCount, upsertedCount, upsertedId } = response
+        const { acknowledged, matchedCount, modifiedCount, upsertedCount, upsertedId } = response;
+        if(acknowledged){
+        }
+        setEdited(true)
 
     }
 
@@ -107,11 +112,9 @@ const EditBook = () => {
                         className="p-2 border-2 w-full rounded"
                     />
                     <button onClick={handleEditBook} className="p-2 border-2 w-full rounded btn bg-blue-300 mt-4">Edit Book{loading&&<span className="loading loading-spinner loading-md"></span>}</button>
-                    <Toaster toastOptions={
-                        { className: "p-2 rounded-md bg-green-300" }
-                    }></Toaster>
                 </Field>
             </Fieldset>
+            {edited && <Toast>Book edit successful</Toast>}
         </div>
     )
 }

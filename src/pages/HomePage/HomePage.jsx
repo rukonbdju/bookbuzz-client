@@ -11,7 +11,6 @@ const HomePage = () => {
             <div className="w-4/5 mx-auto my-10">
                 <TopRatedBooks></TopRatedBooks>
                 <RecentlyAddedBooks></RecentlyAddedBooks>
-                <Blogs></Blogs>
                 <FAQ></FAQ>
             </div>
         </>
